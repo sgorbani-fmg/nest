@@ -1,6 +1,6 @@
 # ------------------------------------------------------
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
-# ------------------------------------------------------
+# ----------------------------------------------
 
 type Recipe {
   id: ID!
@@ -13,14 +13,23 @@ type Recipe {
 """Date custom scalar type"""
 scalar Date
 
+type Category {
+  id: ID!
+  name: String!
+}
+
 type Query {
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
+  category(id: String!): Category!
+  categories(skip: Int = 0, take: Int = 25): [Category!]!
 }
 
 type Mutation {
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
+  addCategory(newCategoryData: NewCategoryInput!): Category!
+  removeCategory(id: String!): Boolean!
 }
 
 input NewRecipeInput {
@@ -29,6 +38,12 @@ input NewRecipeInput {
   ingredients: [String!]!
 }
 
+input NewCategoryInput {
+  title: String!
+  name: [String!]!
+}
+
 type Subscription {
   recipeAdded: Recipe!
+  categoryAdded: Category!
 }
